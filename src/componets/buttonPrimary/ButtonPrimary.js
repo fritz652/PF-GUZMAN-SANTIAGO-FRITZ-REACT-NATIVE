@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, Text} from 'react-native'
 
 
-const ButtonPrimary = ({text}) => {
+const ButtonPrimary = ({text, onPress}) => {
   return (
-    <Pressable  style={styles.button}title='Agregar Tarea'>
+    <Pressable onPress={onPress} style={styles.button}title='Agregar Tarea' >
         <Text style={styles.textButton}>{text}</Text>
     </Pressable>
   )
