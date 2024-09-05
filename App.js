@@ -1,24 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import {StyleSheet,  TextInput,  View} from 'react-native';
+import {StyleSheet, View, TextInput, Text, FlatList } from 'react-native';
 import ButtonPrimary from './src/componets/buttonPrimary/ButtonPrimary';
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
+
+//from https://www.npmjs.com/package/react-native-uuid  para  generar ids
+import uuid from 'react-native-uuid';
+import CardTask from './src/componets/CardTask/CardTask';
+
 
 
 export default function App() {
-
-
   
+  const [taskName,setTaskName] =  useState('')
   const [tasks,setTasks] = useState([])
 
-  const [newTask,setNewTask] =  useState('')
-
-  useEffect( ()=>{
-    console.log(tasks)
-  },[tasks])
-
   const handleAddTask = () =>{
+    const newTask = {
+      id: uuid.v4(),
+      name:taskName
+    }
+
     setTasks([...tasks,newTask])
-    setNewTask('')
+    setTaskName('')
   }
 
   return (
@@ -27,11 +30,17 @@ export default function App() {
           <TextInput 
               style={styles.input} 
               placeholder= 'Ingrese una tarea'
-              value={newTask}
-              onChangeText={(e)=> setNewTask(e)}
+              value={taskName}
+              onChangeText={setTaskName}
+              text="Agregar"
             /> 
           <ButtonPrimary onPress={handleAddTask} text='Agregar'/>
       </View>
+      <FlatList
+          data={tasks}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => <CardTask task={item}/>}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -42,7 +51,6 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop:30,
     backgroundColor:'#c7e0f4',
-    /* alignItems: 'center', */
   },
 
   containerInput:{
