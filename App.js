@@ -6,6 +6,7 @@ import {useState } from 'react';
 //from https://www.npmjs.com/package/react-native-uuid  para  generar ids
 import uuid from 'react-native-uuid';
 import CardTask from './src/componets/CardTask/CardTask';
+import ModalPrimary from './src/componets/modalPrimary/ModalPrimary';
 
 
 
@@ -25,24 +26,27 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerInput}>
-          <TextInput 
-              style={styles.input} 
-              placeholder= 'Ingrese una tarea'
-              value={taskName}
-              onChangeText={setTaskName}
-              text="Agregar"
-            /> 
-          <ButtonPrimary onPress={handleAddTask} text='Agregar'/>
+    <>
+      <View style={styles.container}>
+        <View style={styles.containerInput}>
+            <TextInput 
+                style={styles.input} 
+                placeholder= 'Ingrese una tarea'
+                value={taskName}
+                onChangeText={setTaskName}
+                text="Agregar"
+              /> 
+            <ButtonPrimary onPress={handleAddTask} text='Agregar'/>
+        </View>
+        <FlatList
+            data={tasks}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => <CardTask task={item}/>}
+        />
+        <StatusBar style="auto" />
       </View>
-      <FlatList
-          data={tasks}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <CardTask task={item}/>}
-      />
-      <StatusBar style="auto" />
-    </View>
+      <ModalPrimary text='¿Quiere agregar una tareas?'/>
+    </>
   );
 }
 
