@@ -11,7 +11,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 
-export default function App() {
+export default function App() { 
   
   const [taskName,setTaskName] =  useState('')
   const [tasks,setTasks] = useState([])
