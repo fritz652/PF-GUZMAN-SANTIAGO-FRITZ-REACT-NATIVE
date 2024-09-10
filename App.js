@@ -7,6 +7,7 @@ import {useState } from 'react';
 import uuid from 'react-native-uuid';
 import CardTask from './src/componets/CardTask/CardTask';
 import ModalPrimary from './src/componets/modalPrimary/ModalPrimary';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 
@@ -43,7 +44,9 @@ export default function App() {
                 onChangeText={setTaskName}
                 text="Agregar"
               /> 
-            <ButtonPrimary onPress={handleVisibleModal} text='Agregar'/>
+            <ButtonPrimary onPress={handleVisibleModal} text='Agregar'>
+              <AntDesign name="pluscircle" size={24} color="white" />
+            </ButtonPrimary>
         </View>
         <FlatList
             data={tasks}
