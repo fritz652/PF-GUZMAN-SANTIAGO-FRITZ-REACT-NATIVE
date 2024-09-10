@@ -14,6 +14,12 @@ export default function App() {
   
   const [taskName,setTaskName] =  useState('')
   const [tasks,setTasks] = useState([])
+  const [visibleModal, setVisibleModal] = useState(false)
+
+
+  const handleVisibleModal = ()=>{
+    setVisibleModal(!visibleModal)
+  }
 
   const handleAddTask = () =>{
     const newTask = {
@@ -23,6 +29,7 @@ export default function App() {
 
     setTasks([...tasks,newTask])
     setTaskName('')
+    setVisibleModal(false)
   }
 
   return (
@@ -36,7 +43,7 @@ export default function App() {
                 onChangeText={setTaskName}
                 text="Agregar"
               /> 
-            <ButtonPrimary onPress={handleAddTask} text='Agregar'/>
+            <ButtonPrimary onPress={handleVisibleModal} text='Agregar'/>
         </View>
         <FlatList
             data={tasks}
@@ -45,7 +52,11 @@ export default function App() {
         />
         <StatusBar style="auto" />
       </View>
-      <ModalPrimary text='¿Quiere agregar una tareas?'/>
+      <ModalPrimary text='¿Quiere agregar una tareas?'
+      visible={visibleModal}
+      handleVisibleModal={handleVisibleModal}
+      handleModal ={handleAddTask}
+      />
     </>
   );
 }

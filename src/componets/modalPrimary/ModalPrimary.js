@@ -2,10 +2,10 @@ import { StyleSheet, Text, View, Modal } from 'react-native'
 import ButtonPrimary from '../buttonPrimary/ButtonPrimary'
 
 
-export default function ModalPrimary({text}) {
+export default function ModalPrimary({text, visible,handleVisibleModal,handleModal}) {
   return (
     <Modal 
-    visible={true} 
+    visible={visible} 
     animationType='fade'
     transparent
     >
@@ -13,8 +13,8 @@ export default function ModalPrimary({text}) {
             <View style={styles.content}>
                 <Text style={styles.title}>{text}</Text>
                 <View style={styles.buttonContainer}>
-                    <ButtonPrimary text="Sí"/>
-                    <ButtonPrimary text="No"/>
+                    <ButtonPrimary onPress={handleModal} text="Sí"/>
+                    <ButtonPrimary onPress={handleVisibleModal} text="No"/>
                 </View>
             </View>
         </View>
@@ -25,10 +25,9 @@ export default function ModalPrimary({text}) {
 const styles = StyleSheet.create({
     container:{
         width:"100%",
-        height:"100%",
         backgroundColor:"#00000088",
         flex:1,
-        alignContent:"center",
+        alignItems: "center", 
         justifyContent:"center"
     },
     content:{
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         borderRadius:20,
+        gap:15
     },
     title:{
         fontSize:16,
